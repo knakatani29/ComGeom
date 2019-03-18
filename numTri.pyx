@@ -2,20 +2,21 @@
 # for a convex polygon
 
 # the input, n, is a list of vertices
-cdef numTri(n):
-    cdef int i
+def numTri(n):
+    cdef int i, l
+    l = len(n)
     res = []
     # when there are only three vertices, it is already triangulated
-    if len(n) == 3:
+    if l == 3:
         return []
     else:
         # Take the vertice on the head of the list, namely the vertice 0
         # as the standard
         # We first calculate the case where there exists a diagonal
         # that connects the vertice 0 and another.
-        for i in range(2, len(n)-1):
+        for i in range(2, l-1):
             y = [n[0]]
-            for b in range(i, len(n)):
+            for b in range(i, l):
                 y += [n[b]]
             q = []
             if i == 2:
