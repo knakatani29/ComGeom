@@ -16,8 +16,8 @@ def numTri(n):
             y = [n[0]]
             for b in range(i, len(n)):
                 y += [n[b]]
-                q = []
-            if i==2:
+            q = []
+            if i == 2:
                 if len(y) == 3:
                     q = q  + [(n[0], n[i])]
                     res += [q]
@@ -31,17 +31,16 @@ def numTri(n):
                 x = []
                 for a in range(1, i+1):
                     x += [n[a]]
-                q = []
                 if len(x) == 3 and len(y) == 3:
                     q = q + [(n[1], n[i])]+ [(n[0], n[i])]
                     res += [q]
-                elif len(y) == 3:
+                elif len(x) == 3:
                     yy = numTri(y)
                     for h in yy:
                         q=[]
                         q = q + [(n[1], n[i])] +  [(n[0], n[i])] + h
                         res += [q]
-                elif len(x) == 3:
+                elif len(y) == 3:
                     xx = numTri(x)
                     for k in xx:
                         q=[]
@@ -66,9 +65,9 @@ def numTri(n):
         else:
             zz = numTri(z)
             for v in zz:
-                p=[]
+                p = []
                 p = p + [(n[1], n[len(n)-1])] + v
                 res += [p]
     return res
 
-print(numTri([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]))
+print(len(numTri([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14])))
