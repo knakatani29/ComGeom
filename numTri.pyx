@@ -3,7 +3,7 @@
 
 # the input, n, is a list of vertices
 def numTri(n):
-    cdef int i, l
+    cdef int i, l, ly, lx, lz
     l = len(n)
     res = []
     # when there are only three vertices, it is already triangulated
@@ -18,9 +18,10 @@ def numTri(n):
             y = [n[0]]
             for b in range(i, l):
                 y += [n[b]]
+            ly = len(y)
             q = []
             if i == 2:
-                if len(y) == 3:
+                if ly == 3:
                     q = q  + [(n[0], n[i])]
                     res += [q]
                 else:
@@ -33,16 +34,17 @@ def numTri(n):
                 x = []
                 for a in range(1, i+1):
                     x += [n[a]]
-                if len(x) == 3 and len(y) == 3:
+                lx = len(x)
+                if lx == 3 and ly == 3:
                     q = q + [(n[1], n[i])]+ [(n[0], n[i])]
                     res += [q]
-                elif len(x) == 3:
+                elif lx == 3:
                     yy = numTri(y)
                     for h in yy:
                         q=[]
                         q = q + [(n[1], n[i])] +  [(n[0], n[i])] + h
                         res += [q]
-                elif len(y) == 3:
+                elif ly == 3:
                     xx = numTri(x)
                     for k in xx:
                         q=[]
@@ -58,18 +60,17 @@ def numTri(n):
                             res += [q]
         # When there does not exist a diagonal at the vertex 0
         z = []
-        for c in range(1, len(n)):
+        for c in range(1, l):
             z += [n[c]]
+        lz = len(z)
         p = []
-        if len(z) == 3:
-            p = p + [(n[1], n[len(n)-1])]
+        if lz == 3:
+            p = p + [(n[1], n[l-1])]
             res += [p]
         else:
             zz = numTri(z)
             for v in zz:
                 p = []
-                p = p + [(n[1], n[len(n)-1])] + v
+                p = p + [(n[1], n[l-1])] + v
                 res += [p]
     return res
-
-#print(len(numTri([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16])))
