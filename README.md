@@ -56,5 +56,3 @@ combinations of diagonals for B.
 As this algorithm considers the "youngest" diagonal for each call of numTri, it should be straight-forward that there is
 no overcounting of a triangulation.
 
-We used an array so that we can append in O(1) time.
-
